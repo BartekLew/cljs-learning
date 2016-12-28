@@ -3,14 +3,12 @@
 
 (enable-console-print!)
 
-(println "This text is printed from src/hello/core.cljs. Go ahead and edit it and see reloading in action.")
+(defn by-id [id]
+  (js/document.getElementById id))
 
-;; define your app data so that it doesn't get over-written on reload
+(.addEventListener (by-id "query_form") "submit"
+  (fn [event]
+    (do
+      (js/alert (.-value (by-id "query")))
+      (.preventDefault event))))
 
-(defonce app-state (atom {:text "Hello world!"}))
-
-(defn on-js-reload []
-  ;; optionally touch your app-state to force rerendering depending on
-  ;; your application
-  ;; (swap! app-state update-in [:__figwheel_counter] inc)
-)
