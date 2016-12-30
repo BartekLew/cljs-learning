@@ -14,14 +14,14 @@
 (def endpoint "http://127.0.0.1:8080/query.json")
 
 (defn search [phrase]
-  (go (let [responce (<! (http/get endpoint
+  (go (let [response (<! (http/get endpoint
                           { :with-credentials? true
                             :query-params { "results" 5
                                             "search-string" phrase }} ))]
         (aset (by-id "output") "innerHTML"
               (reduce str (map (fn [r]
                                  (str "<li><a href=\"" (:url r) "\">" (:name r) "</a></li>" ))
-                               (:results (:products (:body responce))) 
+                               (:results (:products (:body response))) 
               ))))))
 
 (.addEventListener (by-id "query_form") "submit"
