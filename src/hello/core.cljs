@@ -1,7 +1,8 @@
 (ns hello.core
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [cljs-http.client :as http]
-            [cljs.core.async :refer [<!]] ))
+            [cljs.core.async :refer [<!]]
+            ))
 
 (enable-console-print!)
 
@@ -17,7 +18,11 @@
                           { :with-credentials? true
                             :query-params { "results" 5
                                             "search-string" phrase }} ))]
-        (aset (by-id "output") "value" (pr-str responce)))))
+        (aset (by-id "output") "innerHTML"
+              (reduce str (map (fn [r]
+                                 (str "<li><a href=\"" (:url r) "\">" (:name r) "</a></li>" ))
+                               (:results (:products (:body responce))) 
+              ))))))
 
 (.addEventListener (by-id "query_form") "submit"
   (fn [event]
