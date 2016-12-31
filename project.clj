@@ -11,6 +11,7 @@
                  [org.clojure/core.async "0.2.391"
                   :exclusions [org.clojure/tools.reader]]
                  [cljs-http "0.1.42"]
+                 [rum "0.10.7"]
                  ]
 
   :plugins [[lein-figwheel "0.5.8"]
