@@ -10,9 +10,7 @@
 (defn by-id [id]
   (js/document.getElementById id))
 
-;(def endpoint "https://api.fablo.pl/api/2/frisco.pl/products/query" )
-;due to unresolved CORS problem, i continue using mocked responce on local
-(def endpoint "http://127.0.0.1:8080/query.json")
+(def endpoint "https://api.fablo.pl/api/2/frisco.pl/products/query" )
 
 (rum/defc item [url text]
   [:li [:a { :href url } text]])
